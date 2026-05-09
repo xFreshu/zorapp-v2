@@ -1,63 +1,88 @@
 # Dependencies
-
-/node_modules
-/.pnp
+node_modules/
+.pnp
 .pnp.*
 .yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+!.yarn/patches/
+!.yarn/plugins/
+!.yarn/releases/
+!.yarn/sdks/
+!.yarn/versions/
 
-# Testing
+# Next.js and production output
+.next/
+out/
+build/
+dist/
+.next-cache/
 
-/coverage
-/.nyc_output
+# Test, coverage, and QA artifacts
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+cypress/screenshots/
+cypress/videos/
 
-# Next.js
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-/.next/
-/out/
-/.next-cache/
-
-# Production builds
-
-/build
-/dist
-
-# Environment variables
-
+# Environment variables and secrets
 .env
 .env.*
 !.env.example
 !.env.local.example
+*.pem
+*.key
+*.cert
+*.crt
+*.p12
+*.pfx
+*.jks
+.npmrc
+.yarnrc
+.sentryclirc
 
-# Logs
+# Local databases and generated data
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.local.db
+prisma/dev.db
+tmp/
+temp/
+.tmp/
+.temp/
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-# TypeScript
-
-*.tsbuildinfo
-next-env.d.ts
-
-# Package manager caches
-
-.npm
+# Caches
+.cache/
+.turbo/
+.parcel-cache/
 .eslintcache
 .stylelintcache
+*.tsbuildinfo
 
-# Vercel
+# Hosting and deployment state
+.vercel/
+.netlify/
 
-.vercel
+# IDE and editor state
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.swp
+*.swo
+*~
 
 # Operating system files
-
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -66,21 +91,6 @@ Icon
 Thumbs.db
 Desktop.ini
 
-# Certificates and local secrets
-
-*.pem
-
-# Editor and IDE files
-
-.idea
-.vscode/*
-!.vscode/extensions.json
-!.vscode/settings.json
-
-# Temporary files
-
-*.log
-*.tmp
-*.temp
-.cache
-.turbo
+# Local Codex and agent scratch files
+.codex/
+.agents/tmp/
