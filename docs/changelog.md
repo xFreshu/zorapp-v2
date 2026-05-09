@@ -13,3 +13,7 @@
 - Dodano dokumentację projektu w `/docs`.
 - Uporządkowano `.gitignore` pod publiczne repozytorium: sekrety, buildy, cache, IDE, lokalne bazy i artefakty testów.
 - Zmieniono przełączanie języków na rozwijaną listę z flagami i uproszczono przełącznik motywu do animowanego przycisku z emoji.
+- Dodano konfigurację Vitest i React Testing Library oraz pierwsze testy dla danych, katalogu, języków, dark mode i panelu admina.
+- Dodano workflow GitHub Actions uruchamiający lint, testy i build.
+- Uproszczono workflow CI, aby używał kontenera `node:22` bez ostrzegających inputów `setup-node`.
+- Zweryfikowano Git remote/dry-run push; nie odtworzono warningu commit/push w lokalnej konfiguracji repozytorium.

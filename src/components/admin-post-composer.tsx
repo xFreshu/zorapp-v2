@@ -20,19 +20,11 @@ type AdminCopy = {
 const storageKey = "zory-editorial-posts";
 
 export function AdminPostComposer({ copy }: { copy: AdminCopy }) {
-  const [posts, setPosts] = useState<EditorialPost[]>(editorialPosts);
+  const [posts, setPosts] = useState<EditorialPost[]>(() => getInitialPosts());
   const [title, setTitle] = useState("");
   const [lead, setLead] = useState("");
   const [category, setCategory] = useState("Społeczność");
   const [status, setStatus] = useState<EditorialPost["status"]>("draft");
-
-  useEffect(() => {
-    const savedPosts = window.localStorage.getItem(storageKey);
-
-    if (savedPosts) {
-      setPosts(JSON.parse(savedPosts) as EditorialPost[]);
-    }
-  }, []);
 
   useEffect(() => {
     window.localStorage.setItem(storageKey, JSON.stringify(posts));
@@ -146,4 +138,14 @@ export function AdminPostComposer({ copy }: { copy: AdminCopy }) {
       </div>
     </section>
   );
+}
+
+function getInitialPosts() {
+  if (typeof window === "undefined") {
+    return editorialPosts;
+  }
+
+  const savedPosts = window.localStorage.getItem(storageKey);
+
+  return savedPosts ? (JSON.parse(savedPosts) as EditorialPost[]) : editorialPosts;
 }

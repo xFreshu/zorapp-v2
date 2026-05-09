@@ -12,18 +12,11 @@ type ThemeToggleProps = {
 };
 
 export function ThemeToggle({ labels }: ThemeToggleProps) {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>(() => getInitialTheme());
 
   useEffect(() => {
-    const savedTheme = window.localStorage.getItem("zory-theme") as Theme | null;
-    const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-    const nextTheme = savedTheme ?? preferredTheme;
-
-    setTheme(nextTheme);
-    document.documentElement.classList.toggle("dark", nextTheme === "dark");
-  }, []);
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  }, [theme]);
 
   function changeTheme(nextTheme: Theme) {
     setTheme(nextTheme);
@@ -75,4 +68,18 @@ export function ThemeToggle({ labels }: ThemeToggleProps) {
       </span>
     </button>
   );
+}
+
+function getInitialTheme(): Theme {
+  if (typeof window === "undefined") {
+    return "light";
+  }
+
+  const savedTheme = window.localStorage.getItem("zory-theme") as Theme | null;
+
+  if (savedTheme) {
+    return savedTheme;
+  }
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }

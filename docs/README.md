@@ -28,6 +28,9 @@ Projekt jest prototypem frontendowym w Next.js 16.2.4 App Router. Dane są lokal
 - `src/components/directory-search.tsx` - interaktywna wyszukiwarka katalogu.
 - `src/components/admin-post-composer.tsx` - lokalny panel dodawania postów.
 - `src/components/theme-toggle.tsx` - przełącznik jasny/ciemny.
+- `vitest.config.ts` - konfiguracja testów jednostkowych i komponentowych.
+- `vitest.setup.ts` - globalny setup testów.
+- `docs/testing.md` - opis strategii testowania, komend i aktualnych testów.
 
 ## Zasada pracy na przyszłość
 
@@ -36,3 +39,4 @@ Projekt jest prototypem frontendowym w Next.js 16.2.4 App Router. Dane są lokal
 3. Po zmianach w kodzie uzupełnić `docs/changelog.md`.
 4. Po zmianach w modelach danych uzupełnić `docs/data-model.md`.
 5. Po zmianach architektonicznych uzupełnić `docs/architecture.md`.
+6. Po zmianach w testach uzupełnić `docs/testing.md`.
