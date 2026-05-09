@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AdminPostComposer } from "@/components/admin-post-composer";
 import { DirectorySearch } from "@/components/directory-search";
+import { LanguageSelect } from "@/components/language-select";
 import { ThemeToggle } from "@/components/theme-toggle";
 import {
   cityEvents,
@@ -50,7 +51,6 @@ function SiteHeader({
   lang: Locale;
   nav: string[];
   themeLabels: {
-    theme: string;
     light: string;
     dark: string;
   };
@@ -62,10 +62,9 @@ function SiteHeader({
           <Link className="focus-ring rounded-md text-xl font-bold" href={`/${lang}`}>
             Żory.info
           </Link>
-          <div className="flex gap-1 xl:hidden">
-            {locales.map((locale) => (
-              <LanguageLink key={locale} locale={locale} active={locale === lang} />
-            ))}
+          <div className="flex items-center gap-2 xl:hidden">
+            <LanguageSelect currentLang={lang} />
+            <ThemeToggle labels={themeLabels} />
           </div>
         </div>
 
@@ -82,31 +81,13 @@ function SiteHeader({
         </nav>
 
         <div className="flex flex-wrap items-center gap-3">
-          <div className="hidden gap-1 xl:flex">
-            {locales.map((locale) => (
-              <LanguageLink key={locale} locale={locale} active={locale === lang} />
-            ))}
+          <div className="hidden items-center gap-2 xl:flex">
+            <LanguageSelect currentLang={lang} />
+            <ThemeToggle labels={themeLabels} />
           </div>
-          <ThemeToggle labels={themeLabels} />
         </div>
       </div>
     </header>
-  );
-}
-
-function LanguageLink({ locale, active }: { locale: Locale; active: boolean }) {
-  return (
-    <Link
-      className={`focus-ring rounded-md px-3 py-2 text-sm transition ${
-        active
-          ? "bg-[var(--foreground)] text-[var(--background)]"
-          : "text-[var(--muted)] hover:bg-[var(--panel)] hover:text-[var(--foreground)]"
-      }`}
-      href={`/${locale}`}
-      aria-current={active ? "page" : undefined}
-    >
-      {locale.toUpperCase()}
-    </Link>
   );
 }
 

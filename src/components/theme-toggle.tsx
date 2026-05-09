@@ -6,7 +6,6 @@ type Theme = "light" | "dark";
 
 type ThemeToggleProps = {
   labels: {
-    theme: string;
     light: string;
     dark: string;
   };
@@ -32,36 +31,48 @@ export function ThemeToggle({ labels }: ThemeToggleProps) {
     document.documentElement.classList.toggle("dark", nextTheme === "dark");
   }
 
+  const isDark = theme === "dark";
+
   return (
-    <div
-      className="inline-grid grid-cols-[auto_1fr_1fr] items-center gap-1 rounded-lg border border-[var(--line)] bg-[var(--panel)] p-1 text-sm"
-      aria-label={labels.theme}
+    <button
+      type="button"
+      className="focus-ring group relative h-11 w-[5.75rem] overflow-hidden rounded-lg border border-[var(--line)] bg-[var(--panel)] p-1 shadow-sm transition duration-500 hover:-translate-y-0.5 hover:bg-[var(--panel-strong)]"
+      onClick={() => changeTheme(isDark ? "light" : "dark")}
+      aria-label={isDark ? labels.light : labels.dark}
+      aria-pressed={isDark}
     >
-      <span className="px-2 text-[var(--muted)]">{labels.theme}</span>
-      <button
-        type="button"
-        className={`focus-ring rounded-md px-3 py-2 transition ${
-          theme === "light"
-            ? "bg-[var(--brand)] text-white"
-            : "text-[var(--foreground)] hover:bg-[var(--panel-strong)]"
+      <span
+        className={`absolute inset-1 rounded-md transition duration-500 ${
+          isDark ? "bg-[#152c44]" : "bg-[#ffe8a3]"
         }`}
-        onClick={() => changeTheme("light")}
-        aria-pressed={theme === "light"}
-      >
-        {labels.light}
-      </button>
-      <button
-        type="button"
-        className={`focus-ring rounded-md px-3 py-2 transition ${
-          theme === "dark"
-            ? "bg-[var(--brand)] text-[#071512]"
-            : "text-[var(--foreground)] hover:bg-[var(--panel-strong)]"
+        aria-hidden="true"
+      />
+      <span
+        className={`absolute top-1/2 z-10 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-md bg-[var(--panel-strong)] text-lg shadow-md transition duration-500 ease-out ${
+          isDark ? "translate-x-[3rem] rotate-[18deg]" : "translate-x-0 rotate-[-8deg]"
         }`}
-        onClick={() => changeTheme("dark")}
-        aria-pressed={theme === "dark"}
+        aria-hidden="true"
       >
-        {labels.dark}
-      </button>
-    </div>
+        <span key={theme} className="theme-emoji">
+          {isDark ? "🌙" : "☀️"}
+        </span>
+      </span>
+      <span
+        className={`absolute top-1/2 z-0 -translate-y-1/2 text-base transition duration-500 ${
+          isDark ? "left-3 opacity-100" : "left-3 opacity-45"
+        }`}
+        aria-hidden="true"
+      >
+        ✨
+      </span>
+      <span
+        className={`absolute top-1/2 z-0 -translate-y-1/2 text-base transition duration-500 ${
+          isDark ? "right-3 opacity-45" : "right-3 opacity-100"
+        }`}
+        aria-hidden="true"
+      >
+        🌤️
+      </span>
+    </button>
   );
 }

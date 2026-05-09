@@ -12,3 +12,4 @@
 - Dodano panel admina do lokalnego dodawania postów.
 - Dodano dokumentację projektu w `/docs`.
 - Uporządkowano `.gitignore` pod publiczne repozytorium: sekrety, buildy, cache, IDE, lokalne bazy i artefakty testów.
+- Zmieniono przełączanie języków na rozwijaną listę z flagami i uproszczono przełącznik motywu do animowanego przycisku z emoji.
