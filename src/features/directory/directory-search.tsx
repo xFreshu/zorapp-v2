@@ -2,11 +2,12 @@
 
 import { useMemo, useState } from "react";
 import {
-  businessCategories,
-  businessPoints,
+  getBusinessCategories,
+  getBusinessPoints,
   getCategory,
   type BusinessCategory,
   type BusinessPoint,
+  type Locale,
 } from "@/lib/portal-data";
 
 type DirectoryCopy = {
@@ -24,25 +25,27 @@ type DirectoryCopy = {
   sourceNote: string;
 };
 
-export function DirectorySearch({ copy }: { copy: DirectoryCopy }) {
+export function DirectorySearch({ copy, locale }: { copy: DirectoryCopy; locale: Locale }) {
   const [query, setQuery] = useState("");
   const [categoryId, setCategoryId] = useState("all");
   const [openNow, setOpenNow] = useState(false);
   const [featuredOnly, setFeaturedOnly] = useState(false);
+  const categories = useMemo(() => getBusinessCategories(locale), [locale]);
+  const points = useMemo(() => getBusinessPoints(locale), [locale]);
 
   const groupedCategories = useMemo(() => {
-    return businessCategories.reduce<Record<string, BusinessCategory[]>>((groups, category) => {
+    return categories.reduce<Record<string, BusinessCategory[]>>((groups, category) => {
       groups[category.group] = groups[category.group] ?? [];
       groups[category.group].push(category);
       return groups;
     }, {});
-  }, []);
+  }, [categories]);
 
   const filteredPoints = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
 
-    return businessPoints.filter((point) => {
-      const category = getCategory(point.categoryId);
+    return points.filter((point) => {
+      const category = getCategory(point.categoryId, locale);
       const searchable = [
         point.name,
         point.district,
@@ -64,7 +67,7 @@ export function DirectorySearch({ copy }: { copy: DirectoryCopy }) {
 
       return matchesQuery && matchesCategory && matchesOpen && matchesFeatured;
     });
-  }, [categoryId, featuredOnly, openNow, query]);
+  }, [categoryId, featuredOnly, locale, openNow, points, query]);
 
   return (
     <section className="border-y border-[var(--line)] bg-[var(--panel)]/85 py-12 md:py-16">
@@ -99,7 +102,7 @@ export function DirectorySearch({ copy }: { copy: DirectoryCopy }) {
                 onChange={(event) => setCategoryId(event.target.value)}
               >
                 <option value="all">{copy.allCategories}</option>
-                {businessCategories.map((category) => (
+                {categories.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.name}
                   </option>
@@ -157,6 +160,7 @@ export function DirectorySearch({ copy }: { copy: DirectoryCopy }) {
                 <BusinessResult
                   key={point.id}
                   point={point}
+                  locale={locale}
                   labels={{ openStatus: copy.openStatus, checkHours: copy.checkHours }}
                 />
               ))}
@@ -170,12 +174,14 @@ export function DirectorySearch({ copy }: { copy: DirectoryCopy }) {
 
 function BusinessResult({
   point,
+  locale,
   labels,
 }: {
   point: BusinessPoint;
+  locale: Locale;
   labels: Pick<DirectoryCopy, "openStatus" | "checkHours">;
 }) {
-  const category = getCategory(point.categoryId);
+  const category = getCategory(point.categoryId, locale);
 
   return (
     <article className="rounded-lg border border-[var(--line)] bg-[var(--panel-strong)] p-5 shadow-sm">

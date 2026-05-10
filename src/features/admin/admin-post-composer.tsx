@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { editorialPosts, type EditorialPost } from "@/lib/portal-data";
+import { getEditorialPosts, type EditorialPost, type Locale } from "@/lib/portal-data";
 
 type AdminCopy = {
   adminTitle: string;
@@ -13,22 +13,24 @@ type AdminCopy = {
   categoryField: string;
   statusField: string;
   addPost: string;
+  defaultCategory: string;
   draft: string;
   published: string;
 };
 
-const storageKey = "zory-editorial-posts";
+const storageKeyPrefix = "zory-editorial-posts";
 
-export function AdminPostComposer({ copy }: { copy: AdminCopy }) {
-  const [posts, setPosts] = useState<EditorialPost[]>(() => getInitialPosts());
+export function AdminPostComposer({ copy, locale }: { copy: AdminCopy; locale: Locale }) {
+  const storageKey = `${storageKeyPrefix}-${locale}`;
+  const [posts, setPosts] = useState<EditorialPost[]>(() => getInitialPosts(locale));
   const [title, setTitle] = useState("");
   const [lead, setLead] = useState("");
-  const [category, setCategory] = useState("Community");
+  const [category, setCategory] = useState(copy.defaultCategory);
   const [status, setStatus] = useState<EditorialPost["status"]>("draft");
 
   useEffect(() => {
     window.localStorage.setItem(storageKey, JSON.stringify(posts));
-  }, [posts]);
+  }, [posts, storageKey]);
 
   const sortedPosts = useMemo(() => {
     return [...posts].sort((first, second) => second.date.localeCompare(first.date));
@@ -45,7 +47,7 @@ export function AdminPostComposer({ copy }: { copy: AdminCopy }) {
       id: `${Date.now()}-${title.toLowerCase().replace(/\s+/g, "-")}`,
       title: title.trim(),
       lead: lead.trim(),
-      category: category.trim() || "Community",
+      category: category.trim() || copy.defaultCategory,
       date: new Date().toISOString().slice(0, 10),
       status,
     };
@@ -53,7 +55,7 @@ export function AdminPostComposer({ copy }: { copy: AdminCopy }) {
     setPosts((currentPosts) => [post, ...currentPosts]);
     setTitle("");
     setLead("");
-    setCategory("Community");
+    setCategory(copy.defaultCategory);
     setStatus("draft");
   }
 
@@ -140,12 +142,12 @@ export function AdminPostComposer({ copy }: { copy: AdminCopy }) {
   );
 }
 
-function getInitialPosts() {
+function getInitialPosts(locale: Locale) {
   if (typeof window === "undefined") {
-    return editorialPosts;
+    return getEditorialPosts(locale);
   }
 
-  const savedPosts = window.localStorage.getItem(storageKey);
+  const savedPosts = window.localStorage.getItem(`${storageKeyPrefix}-${locale}`);
 
-  return savedPosts ? (JSON.parse(savedPosts) as EditorialPost[]) : editorialPosts;
+  return savedPosts ? (JSON.parse(savedPosts) as EditorialPost[]) : getEditorialPosts(locale);
 }

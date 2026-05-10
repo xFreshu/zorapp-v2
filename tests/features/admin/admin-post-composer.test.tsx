@@ -9,7 +9,7 @@ const copy = dictionary.pl;
 describe("AdminPostComposer", () => {
   it("adds a local editorial post from the admin form", async () => {
     const user = userEvent.setup();
-    render(<AdminPostComposer copy={copy} />);
+    render(<AdminPostComposer copy={copy} locale="pl" />);
 
     await user.type(screen.getByLabelText(copy.titleField), "New test post");
     await user.type(screen.getByLabelText(copy.leadField), "Short test post summary.");
@@ -24,7 +24,7 @@ describe("AdminPostComposer", () => {
     expect(screen.getAllByText(copy.published).length).toBeGreaterThan(0);
 
     await waitFor(() => {
-      expect(window.localStorage.getItem("zory-editorial-posts")).toContain("New test post");
+      expect(window.localStorage.getItem("zory-editorial-posts-pl")).toContain("New test post");
     });
   });
 });

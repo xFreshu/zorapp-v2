@@ -15,8 +15,8 @@ describe("LanguageSelect", () => {
     await user.click(trigger);
 
     expect(trigger).toHaveAttribute("aria-expanded", "true");
-    expect(screen.getByRole("option", { name: "Polish" })).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByRole("option", { name: "Polski" })).toHaveAttribute("aria-selected", "true");
     expect(screen.getByRole("option", { name: "English" })).toHaveAttribute("href", "/en");
-    expect(screen.getByRole("option", { name: "Ukrainian" })).toHaveAttribute("href", "/uk");
+    expect(screen.getByRole("option", { name: "Українська" })).toHaveAttribute("href", "/uk");
   });
 });
