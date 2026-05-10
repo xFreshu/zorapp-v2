@@ -25,7 +25,7 @@ export function LanguageSelect({ currentLang }: LanguageSelectProps) {
         onClick={() => setOpen((isOpen) => !isOpen)}
         aria-haspopup="listbox"
         aria-expanded={open}
-        aria-label="Wybierz język"
+        aria-label="Choose language"
       >
         <span aria-hidden="true">{languageFlags[currentLang]}</span>
         <span className={`text-xs text-[var(--muted)] transition-transform duration-300 ${open ? "rotate-180" : ""}`}>

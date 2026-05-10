@@ -18,31 +18,42 @@ npm run test:ui
 ## Konfiguracja
 
 - `vitest.config.ts` - konfiguracja Vitesta, React plugin, alias `@` do `src`, jsdom i coverage.
-- `vitest.setup.ts` - cleanup po testach, `jest-dom`, czyszczenie `localStorage`, reset klasy `dark`, mock `matchMedia`.
+- `tests/setup/vitest.setup.ts` - cleanup po testach, `jest-dom`, czyszczenie `localStorage`, reset klasy `dark`, mock `matchMedia`.
 - `.github/workflows/ci.yml` - GitHub Actions dla `lint`, `test` i `build` na pushach do `main` oraz pull requestach; job działa w kontenerze `node:22`.
+
+## Struktura katalogów
+
+```text
+tests/
+  features/    # testy mirrorujące moduły z src/features
+  lib/         # testy danych i logiki pomocniczej
+  setup/       # globalny setup środowiska testowego
+```
+
+Kod produkcyjny zostaje w `src/`. Testy nie są colocated z komponentami, żeby katalogi aplikacyjne były krótsze i łatwiejsze do skanowania.
 
 ## Aktualny zakres testów
 
-- `src/lib/portal-data.test.ts`
+- `tests/lib/portal-data.test.ts`
   - domyślny język `pl`,
   - obecność kluczowych branż,
   - spójność punktów katalogu z kategoriami.
 
-- `src/components/directory-search.test.tsx`
+- `tests/features/directory/directory-search.test.tsx`
   - render katalogu,
   - filtrowanie po frazie,
   - filtrowanie po statusie otwarcia.
 
-- `src/components/language-select.test.tsx`
+- `tests/features/i18n/language-select.test.tsx`
   - rozwijana lista języków,
   - linki do `/pl`, `/en`, `/uk`,
   - domyślne zaznaczenie polskiego.
 
-- `src/components/theme-toggle.test.tsx`
+- `tests/features/theme/theme-toggle.test.tsx`
   - przełączanie dark mode,
   - zapis wyboru w `localStorage`.
 
-- `src/components/admin-post-composer.test.tsx`
+- `tests/features/admin/admin-post-composer.test.tsx`
   - dodawanie posta z panelu admina,
   - zapis posta w `localStorage`.
 

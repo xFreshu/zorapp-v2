@@ -12,11 +12,11 @@ Ten folder jest roboczą pamięcią projektu dla Codex. Po każdej większej zmi
 - wyszukiwarka branż, punktów i tagów,
 - panel administracyjny do dodawania postów,
 - dark mode,
-- wersje językowe: polska, angielska, ukraińska.
+- trasy językowe: `pl`, `en`, `uk`.
 
 ## Aktualny stan
 
-Projekt jest prototypem frontendowym w Next.js 16.2.4 App Router. Dane są lokalne i demonstracyjne. Panel admina zapisuje posty w `localStorage`, więc pokazuje docelowy przepływ redakcyjny bez backendu, autoryzacji i bazy danych.
+Projekt jest prototypem frontendowym w Next.js 16.2.4 App Router. Dane są lokalne i demonstracyjne. Panel admina zapisuje posty w `localStorage`, więc pokazuje docelowy przepływ redakcyjny bez backendu, autoryzacji i bazy danych. Widoczne teksty aplikacji są obecnie pisane po angielsku.
 
 ## Główne pliki
 
@@ -25,11 +25,14 @@ Projekt jest prototypem frontendowym w Next.js 16.2.4 App Router. Dane są lokal
 - `src/app/layout.tsx` - globalny layout i metadata.
 - `src/app/globals.css` - motyw, dark mode przez klasę `.dark`, bazowe style Tailwind v4.
 - `src/lib/portal-data.ts` - locale, słowniki, kategorie branż, punkty demo, wydarzenia, posty startowe.
-- `src/components/directory-search.tsx` - interaktywna wyszukiwarka katalogu.
-- `src/components/admin-post-composer.tsx` - lokalny panel dodawania postów.
-- `src/components/theme-toggle.tsx` - przełącznik jasny/ciemny.
+- `src/features/directory/directory-search.tsx` - interaktywna wyszukiwarka katalogu.
+- `src/features/admin/admin-post-composer.tsx` - lokalny panel dodawania postów.
+- `src/features/i18n/language-select.tsx` - przełącznik języka.
+- `src/features/theme/theme-toggle.tsx` - przełącznik jasny/ciemny.
+- `tests/features/` - testy komponentów i przepływów domenowych.
+- `tests/lib/` - testy danych i logiki pomocniczej.
+- `tests/setup/vitest.setup.ts` - globalny setup testów.
 - `vitest.config.ts` - konfiguracja testów jednostkowych i komponentowych.
-- `vitest.setup.ts` - globalny setup testów.
 - `docs/testing.md` - opis strategii testowania, komend i aktualnych testów.
 
 ## Zasada pracy na przyszłość

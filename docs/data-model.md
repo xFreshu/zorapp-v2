@@ -8,7 +8,7 @@ Wszystkie dane startowe są teraz w `src/lib/portal-data.ts`.
 type Locale = "pl" | "en" | "uk";
 ```
 
-Słowniki są trzymane w obiekcie `dictionary`. UI jest przygotowany pod polski, angielski i ukraiński.
+Słowniki są trzymane w obiekcie `dictionary`. Trasy `pl`, `en` i `uk` zostają dostępne, ale widoczne teksty aplikacji są teraz pisane po angielsku.
 
 ## BusinessCategory
 
@@ -26,41 +26,41 @@ type BusinessCategory = {
 
 Aktualne grupy obejmują lokalne potrzeby mieszkańców i firm:
 
-- Jedzenie i noclegi
-- Zdrowie i styl
-- Usługi codzienne
-- Profesjonaliści
-- Dom i miasto
-- Rodzina i edukacja
-- Czas wolny
-- Zakupy
-- Biznes lokalny
-- Miasto
+- Food and stays
+- Health and style
+- Everyday services
+- Professional services
+- Home and city
+- Family and education
+- Leisure
+- Shopping
+- Local business
+- City
 
 Aktualne branże:
 
-- Gastronomia
-- Noclegi i turystyka
-- Beauty i fryzjerstwo
-- Zdrowie i rehabilitacja
-- Sport i fitness
-- Motoryzacja
-- Prawo i notariusze
-- Finanse i księgowość
-- Nieruchomości
-- Budownictwo i remonty
-- Dom, ogród i sprzątanie
-- Edukacja i kursy
-- Dzieci i rodzina
-- Kultura i rozrywka
-- Eventy i usługi ślubne
-- Zwierzęta
-- Handel i sklepy
-- IT, marketing i media
-- Transport i logistyka
-- Produkcja i rzemiosło
-- Urzędy i organizacje
-- Energia, odpady i środowisko
+- Food and dining
+- Accommodation and tourism
+- Beauty and hair
+- Health and rehabilitation
+- Sports and fitness
+- Automotive
+- Law and notaries
+- Finance and accounting
+- Real estate
+- Construction and renovation
+- Home, garden, and cleaning
+- Education and courses
+- Kids and family
+- Culture and entertainment
+- Events and wedding services
+- Pets
+- Retail and shops
+- IT, marketing, and media
+- Transport and logistics
+- Manufacturing and crafts
+- Public offices and organizations
+- Energy, waste, and environment
 
 Lista jest szkieletem produktu. Nie jest jeszcze pełną bazą wszystkich firm z Żor.
 

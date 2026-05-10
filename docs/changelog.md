@@ -17,3 +17,5 @@
 - Dodano workflow GitHub Actions uruchamiający lint, testy i build.
 - Uproszczono workflow CI, aby używał kontenera `node:22` bez ostrzegających inputów `setup-node`.
 - Zweryfikowano Git remote/dry-run push; nie odtworzono warningu commit/push w lokalnej konfiguracji repozytorium.
+- Ustandaryzowano strukturę katalogów: przeniesiono kod domenowy do `src/features/`, a testy do osobnego katalogu `tests/`.
+- Zmieniono anchor ID z polskich na angielskie i ujednolicono widoczne teksty aplikacji po angielsku.

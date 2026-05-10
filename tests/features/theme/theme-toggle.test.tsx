@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
+import { ThemeToggle } from "@/features/theme/theme-toggle";
 import { dictionary } from "@/lib/portal-data";
-import { ThemeToggle } from "./theme-toggle";
 
 const labels = dictionary.pl;
 

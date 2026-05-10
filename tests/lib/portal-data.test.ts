@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { businessCategories, businessPoints, dictionary, getCategory, locales } from "./portal-data";
+import { businessCategories, businessPoints, dictionary, getCategory, locales } from "@/lib/portal-data";
 
 describe("portal data", () => {
   it("keeps the Polish locale as the first and default locale", () => {
     expect(locales[0]).toBe("pl");
-    expect(dictionary.pl.langLabel).toBe("Polski");
+    expect(dictionary.pl.langLabel).toBe("Polish");
   });
 
   it("contains the core city directory sectors", () => {
@@ -12,10 +12,10 @@ describe("portal data", () => {
 
     expect(categoryNames).toEqual(
       expect.arrayContaining([
-        "Gastronomia",
-        "Beauty i fryzjerstwo",
-        "Motoryzacja",
-        "Prawo i notariusze",
+        "Food and dining",
+        "Beauty and hair",
+        "Automotive",
+        "Law and notaries",
       ]),
     );
   });

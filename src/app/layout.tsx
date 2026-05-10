@@ -3,11 +3,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Żory.info - lokalny portal miasta",
-    template: "%s | Żory.info",
+    default: "Zory.info - local city portal",
+    template: "%s | Zory.info",
   },
   description:
-    "Responsywny portal miejski dla Żor z wydarzeniami, katalogiem usług, wyszukiwarką branż i panelem redakcyjnym.",
+    "A responsive city portal for Zory with events, a service directory, sector search, and an editorial admin panel.",
 };
 
 export default function RootLayout({
@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pl" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body>{children}</body>
     </html>
   );

@@ -67,7 +67,7 @@ export function DirectorySearch({ copy }: { copy: DirectoryCopy }) {
   }, [categoryId, featuredOnly, openNow, query]);
 
   return (
-    <section id="katalog" className="border-y border-[var(--line)] bg-[var(--panel)]/85 py-12 md:py-16">
+    <section className="border-y border-[var(--line)] bg-[var(--panel)]/85 py-12 md:py-16">
       <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:px-8">
         <div className="space-y-6">
           <div>
@@ -143,7 +143,7 @@ export function DirectorySearch({ copy }: { copy: DirectoryCopy }) {
               {filteredPoints.length} {copy.results}
             </h3>
             <span className="rounded-md bg-[var(--accent-soft)] px-3 py-2 text-sm text-[var(--foreground)]">
-              Żory
+              Zory
             </span>
           </div>
 

@@ -23,7 +23,7 @@ export function AdminPostComposer({ copy }: { copy: AdminCopy }) {
   const [posts, setPosts] = useState<EditorialPost[]>(() => getInitialPosts());
   const [title, setTitle] = useState("");
   const [lead, setLead] = useState("");
-  const [category, setCategory] = useState("Społeczność");
+  const [category, setCategory] = useState("Community");
   const [status, setStatus] = useState<EditorialPost["status"]>("draft");
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export function AdminPostComposer({ copy }: { copy: AdminCopy }) {
       id: `${Date.now()}-${title.toLowerCase().replace(/\s+/g, "-")}`,
       title: title.trim(),
       lead: lead.trim(),
-      category: category.trim() || "Społeczność",
+      category: category.trim() || "Community",
       date: new Date().toISOString().slice(0, 10),
       status,
     };
@@ -53,12 +53,12 @@ export function AdminPostComposer({ copy }: { copy: AdminCopy }) {
     setPosts((currentPosts) => [post, ...currentPosts]);
     setTitle("");
     setLead("");
-    setCategory("Społeczność");
+    setCategory("Community");
     setStatus("draft");
   }
 
   return (
-    <section id="admin" className="bg-[var(--panel)] py-12 md:py-16">
+    <section id="admin" className="scroll-mt-28 bg-[var(--panel)] py-12 md:py-16">
       <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.86fr_1.14fr] lg:px-8">
         <div>
           <p className="mb-3 text-sm font-semibold uppercase text-[var(--accent)]">{copy.adminLabel}</p>
@@ -117,7 +117,7 @@ export function AdminPostComposer({ copy }: { copy: AdminCopy }) {
           </form>
         </div>
 
-        <div id="aktualnosci" className="space-y-4">
+        <div id="news" className="scroll-mt-28 space-y-4">
           <h2 className="text-2xl font-semibold">{copy.postsTitle}</h2>
           <div className="grid gap-4">
             {sortedPosts.map((post) => (

@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { AdminPostComposer } from "@/components/admin-post-composer";
-import { DirectorySearch } from "@/components/directory-search";
-import { LanguageSelect } from "@/components/language-select";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { AdminPostComposer } from "@/features/admin/admin-post-composer";
+import { DirectorySearch } from "@/features/directory/directory-search";
+import { LanguageSelect } from "@/features/i18n/language-select";
+import { ThemeToggle } from "@/features/theme/theme-toggle";
 import {
   cityEvents,
   dictionary,
@@ -17,7 +17,7 @@ type LocalizedPageProps = {
   params: Promise<{ lang: string }>;
 };
 
-const anchors = ["katalog", "wydarzenia", "aktualnosci", "admin"];
+const anchors = ["directory", "events", "news", "admin"];
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
@@ -36,7 +36,9 @@ export default async function LocalizedHome({ params }: LocalizedPageProps) {
     <main className="min-h-screen">
       <SiteHeader lang={lang} nav={copy.nav} themeLabels={copy} />
       <Hero copy={copy} />
-      <DirectorySearch copy={copy} />
+      <div id="directory" className="scroll-mt-28">
+        <DirectorySearch copy={copy} />
+      </div>
       <EventsSection lang={lang} copy={copy} />
       <AdminPostComposer copy={copy} />
     </main>
@@ -60,7 +62,7 @@ function SiteHeader({
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:px-8 xl:flex-row xl:items-center xl:justify-between">
         <div className="flex items-center justify-between gap-4">
           <Link className="focus-ring rounded-md text-xl font-bold" href={`/${lang}`}>
-            Żory.info
+            Zory.info
           </Link>
           <div className="flex items-center gap-2 xl:hidden">
             <LanguageSelect currentLang={lang} />
@@ -101,7 +103,7 @@ function Hero({ copy }: { copy: (typeof dictionary)[Locale] }) {
         <div className="mt-8 flex flex-wrap gap-3">
           <a
             className="focus-ring rounded-md bg-[var(--brand)] px-5 py-3 font-semibold text-white transition hover:bg-[var(--brand-strong)] dark:text-[#071512]"
-            href="#katalog"
+            href="#directory"
           >
             {copy.heroCta}
           </a>
@@ -112,7 +114,7 @@ function Hero({ copy }: { copy: (typeof dictionary)[Locale] }) {
         <dl className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {copy.stats.map((stat) => (
             <div key={stat} className="rounded-lg border border-[var(--line)] bg-[var(--panel)] p-4">
-              <dt className="text-sm text-[var(--muted)]">Żory.info</dt>
+              <dt className="text-sm text-[var(--muted)]">Zory.info</dt>
               <dd className="mt-1 font-semibold">{stat}</dd>
             </div>
           ))}
@@ -123,13 +125,13 @@ function Hero({ copy }: { copy: (typeof dictionary)[Locale] }) {
         <Image
           className="aspect-[4/3] h-full w-full object-cover"
           src="https://commons.wikimedia.org/wiki/Special:FilePath/Rynek%20%C5%BCory.jpg?width=1280"
-          alt="Rynek w Żorach"
+          alt="Market square in Zory"
           width={1280}
           height={720}
           priority
         />
         <figcaption className="border-t border-[var(--line)] px-4 py-3 text-xs leading-5 text-[var(--muted)]">
-          Fot. Kamil Kubica / Wikimedia Commons, CC BY-SA 4.0.
+          Photo by Kamil Kubica / Wikimedia Commons, CC BY-SA 4.0.
         </figcaption>
       </figure>
     </section>
@@ -144,7 +146,7 @@ function EventsSection({ lang, copy }: { lang: Locale; copy: (typeof dictionary)
   }[lang];
 
   return (
-    <section id="wydarzenia" className="py-12 md:py-16">
+    <section id="events" className="scroll-mt-28 py-12 md:py-16">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-8 max-w-2xl">
           <p className="mb-3 text-sm font-semibold uppercase text-[var(--accent)]">{copy.eventsLabel}</p>
